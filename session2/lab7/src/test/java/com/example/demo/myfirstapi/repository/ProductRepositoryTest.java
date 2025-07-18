@@ -22,7 +22,7 @@ class ProductRepositoryTest {
 
     // findAll() tests
     @Test
-    void testFindALlSize() {
+    void testFindAllSize() {
         //  called findAll() method and determine its size
         List<Product> products = productRepository.findAll();
 
@@ -31,7 +31,7 @@ class ProductRepositoryTest {
     }
 
     @Test
-    void testFindALl() {
+    void testFindAll() {
         //  create a new initialized Product ArrayList to test as dummy data
         ArrayList<Product> expected = new ArrayList<>(Arrays.asList(
                 new Product(1L, "Laptop", 1200.00),
