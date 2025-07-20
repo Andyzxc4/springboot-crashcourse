@@ -42,35 +42,12 @@ public class ProductController {
         return product.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    /*
-        The original createProduct method (now commented out) was provided in the lab.
-        However, when tested in Postman, it returned a 500 Internal Server Error and failed to add the product.
-
-        To resolve this, I refactored the method to accept a HashMap<String, Object> instead of a Product object.
-        I then manually extracted and converted the values based on the expected types in the Product constructor.
-        This approach returned a 201 Created status in Postman, and the product was successfully added.
-    */
-
-//    @PostMapping("/products") // Maps HTTP POST requests to /products
-//    @ResponseStatus(HttpStatus.CREATED) // Optional: Returns 201 Created by default for POST success
-//    public Product createProduct(@RequestBody Product newProduct) {
-//        // newProduct object automatically populated from JSON in request body
-//        return productRepository.save(newProduct); // Save and return the saved product (with its new ID)
-//    }
-
     @PostMapping("/products") // Maps HTTP POST requests to /products
     @ResponseStatus(HttpStatus.CREATED) // Optional: Returns 201 Created by default for POST success
-    public Product createProduct(@RequestBody HashMap<String, Object> productMap) {
-        //  extract each attributes
-        Object idObj = productMap.get("id");
-        Long id = (idObj == null) ? null : ((Number) idObj).longValue();
-
-        String name = (String) productMap.get("name");
-        double price = Double.parseDouble(productMap.get("price").toString());
-
-        Product newProduct = new Product(id, name, price);
-
-        return productRepository.save(newProduct); // Save and return the saved product (with its new ID or Update existing Product)
+    public Product createProduct(@RequestBody Product newProduct) {
+        // newProduct object automatically populated from JSON in request body
+        return productRepository.save(newProduct); // Save and return the saved product (with its new ID)
     }
+
 
 }

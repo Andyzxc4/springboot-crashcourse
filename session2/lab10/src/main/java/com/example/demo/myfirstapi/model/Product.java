@@ -8,6 +8,10 @@ public class Product {
     private String name;
     private double price;
 
+    // No-args constructor needed by Jackson during JSON deserialization in Spring Boot
+    public Product() {
+    }
+
     // Constructor to create new Product objects (without ID initially)
     public Product(String name, double price) {
         this.name = name;
